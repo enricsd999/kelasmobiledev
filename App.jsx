@@ -11,7 +11,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [text, setText] = useState('');
-  const [items, setItems] = useState([]);
+  const items = [
+    {
+      id: 1,
+      label: 'Benda',
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
