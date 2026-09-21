@@ -11,12 +11,31 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [text, setText] = useState('');
-  const items = [
+  const [items, setItems] = useState([
     {
+      key: 1,
       id: 1,
-      label: 'Benda',
+      label: 'Benda 2',
     },
-  ];
+    {
+      key: 2,
+      id: 2,
+      label: 'Benda 3',
+    },
+  ]);
+  const addItems = (txt) => {
+    setItems([
+      ...items,
+      {
+        key: Date.now(),
+        id: Date.now(),
+        label: txt,
+      },
+    ]);
+  };
+  const removeItem = (id) => {
+    setItems(items.filter((item)=>item.id!==id))
+  }
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -28,11 +47,12 @@ export default function App() {
             style={styles.input}
             onChangeText={setText}
             value={text}
+            onSubmitEditing={() => addItems(text)}
             placeholder="Enter an item"
             placeholderTextColor="#8A8F98"
             returnKeyType="done"
           />
-          <Pressable style={styles.addButton}>
+          <Pressable style={styles.addButton} onPress={() => addItems(text)}>
             <Text style={styles.addButtonText}>Add</Text>
           </Pressable>
         </View>
@@ -47,7 +67,8 @@ export default function App() {
           renderItem={({ item }) => (
             <View style={styles.itemRow}>
               <Text style={styles.itemText}>{item.label}</Text>
-              <Pressable>
+              <Text style={styles.itemText}>{item.id}</Text>
+              <Pressable onPress={()=>removeItem(item.id)}>
                 <Text style={styles.removeText}>Remove</Text>
               </Pressable>
             </View>
