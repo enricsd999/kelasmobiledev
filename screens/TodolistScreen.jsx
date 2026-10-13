@@ -5,17 +5,7 @@ export default function TodolistScreen() {
   const [text, setText] = useState('');
   const [todos, setTodos] = useState([]);
 
-  const tambahTodo = () => {
-    if (text.trim() === '') {
-      return;
-    }
-    setTodos([...todos, { id: Date.now().toString(), title: text }]);
-    setText('');
-  };
-
-  const hapusTodo = id => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
+ 
 
   return (
     <View style={{ flex: 1, padding: 16 }}>
