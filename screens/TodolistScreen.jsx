@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import { Button, FlatList, Text, TextInput, View } from 'react-native';
 
 export default function TodolistScreen() {
-  const [text, setText] = useState('');
-  const [todos, setTodos] = useState([]);
 
  
 
