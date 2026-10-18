@@ -1,10 +1,10 @@
 import { Button, Text, View } from 'react-native';
 
-export default function TodolistScreen() {
+export default function TodolistScreen({navigation}) {
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <Text style={{ textAlign: 'center' }}>To Do List</Text>
-      <Button title="Kembali ke Home" />
+      <Button title="Kembali ke Home" onPress={()=>{navigation.goBack()}} />
     </View>
   );
 }
