@@ -1,9 +1,16 @@
+import { useContext } from 'react';
 import { Button, Text, View } from 'react-native';
+import { CounterContext } from '../context/CounterContext';
 
 export default function HomeScreen({ navigation }) {
+  const { count, tambah, kurang } = useContext(CounterContext);
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button 
+      <Text style={{ textAlign: 'center' }}>Counter: {count}</Text>
+      <Button title="Tambah" onPress={tambah} />
+      <Button title="Kurang" onPress={kurang} />
+      <Button
         title="Buka Todolist"
         onPress={() => {
           navigation.navigate('Todolist');
@@ -15,7 +22,6 @@ export default function HomeScreen({ navigation }) {
           navigation.navigate('About');
         }}
       />
-      <Text style={{ textAlign: 'center' }}>Belajar Fetch API</Text>
     </View>
   );
 }
