@@ -10,7 +10,7 @@ export default function TodolistScreen({ navigation }) {
   // GET: ambil data todo dari JSONPlaceholder saat screen muncul
   useEffect(() => {
     async function getTodos() {
-      const response = await fetch('');
+      const response = await fetch('http://192.168.56.1:3001/todos');
       const data = await response.json();
       setTodos(data);
     }

@@ -1,0 +1,28 @@
+{
+  "user": {
+    "id": 1,
+    "name": "Enrico"
+  },
+  "users": {
+    "id": 1,
+    "name": "Enrico"
+  },
+  "todos": [
+    {
+      "id": "1",
+      "title": "Kelas Mobile Dev A",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "title": "Kelas Mobile Dev B",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "title": "Kelas Mobile Dev C",
+      "completed": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
