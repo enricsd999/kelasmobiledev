@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Button, FlatList, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, Switch, Text, TextInput, View } from 'react-native';
 import { CounterContext } from '../context/CounterContext';
 
 export default function TodolistScreen({ navigation }) {
@@ -7,6 +7,11 @@ export default function TodolistScreen({ navigation }) {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
   const [completed, setCompleted] = useState(false);
+
+  // State untuk form edit: id todo yang sedang diedit (null = tidak ada)
+  const [editId, setEditId] = useState(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editCompleted, setEditCompleted] = useState(false);
 
   // GET: ambil data todo dari JSONPlaceholder saat screen muncul
   useEffect(() => {
@@ -33,6 +38,18 @@ export default function TodolistScreen({ navigation }) {
     getTodos();
   }
 
+  // Tombol Edit ditekan: isi form edit dengan data item tersebut
+  function startEdit(item) {
+    setEditId(item.id);
+    setEditTitle(item.title);
+    setEditCompleted(item.completed);
+  }
+  function cancelEdit() {
+    setEditId(null);
+    setEditTitle('');
+    setEditCompleted(false);
+  }
+
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <Text style={{ textAlign: 'center' }}>To Do List</Text>
@@ -48,14 +65,45 @@ export default function TodolistScreen({ navigation }) {
       />
       <Button title="Submit" onPress={() => addTodos()} />
 
+      {/* Form edit (PUT), hanya muncul saat tombol Edit ditekan */}
+      {editId !== null && (
+        <View style={{ borderWidth: 1, padding: 8, marginVertical: 8 }}>
+          <Text>Edit Todo #{editId}</Text>
+          <TextInput
+            placeholder="Judul todo..."
+            value={editTitle}
+            onChangeText={setEditTitle}
+            style={{ borderWidth: 1, padding: 8, marginVertical: 8 }}
+          />
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text>Selesai</Text>
+            <Switch value={editCompleted} onValueChange={setEditCompleted} />
+          </View>
+          <View style={{ flexDirection: 'row', gap: 8, marginTop: 8 }}>
+            <Button title="Simpan"  />
+            <Button title="Batal" color="gray" onPress={cancelEdit} />
+          </View>
+        </View>
+      )}
+
       <FlatList
         data={todos}
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
-          <Text>
-            {item.completed ? '[x]' : '[ ]'} {item.title}{' '}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
+              marginVertical: 4,
+            }}
+          >
+            <Text style={{ flex: 1 }}>
+              {item.completed ? '[x]' : '[ ]'} {item.title}
+            </Text>
+            <Button title="Edit" onPress={() => startEdit(item)} />
             <Button title="Hapus" onPress={() => deleteTodos(item.id)} />
-          </Text>
+          </View>
         )}
       />
 

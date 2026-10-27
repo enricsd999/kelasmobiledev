@@ -9,9 +9,9 @@
   },
   "todos": [
     {
-      "id": "1",
       "title": "Kelas Mobile Dev A",
-      "completed": true
+      "completed": true,
+      "id": "1"
     },
     {
       "id": "2",
