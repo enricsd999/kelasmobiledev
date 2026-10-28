@@ -50,6 +50,16 @@ export default function TodolistScreen({ navigation }) {
     setEditCompleted(false);
   }
 
+  async function saveData(id) {
+    await fetch(`http://192.168.56.1:3001/todos/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title:editTitle, completed:editCompleted }),
+    });
+    getTodos();
+    cancelEdit();
+  }
+
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <Text style={{ textAlign: 'center' }}>To Do List</Text>
@@ -80,7 +90,7 @@ export default function TodolistScreen({ navigation }) {
             <Switch value={editCompleted} onValueChange={setEditCompleted} />
           </View>
           <View style={{ flexDirection: 'row', gap: 8, marginTop: 8 }}>
-            <Button title="Simpan"  />
+            <Button title="Simpan" onPress={() => saveData(editId)} />
             <Button title="Batal" color="gray" onPress={cancelEdit} />
           </View>
         </View>

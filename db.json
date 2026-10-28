@@ -16,12 +16,17 @@
     {
       "id": "2",
       "title": "Kelas Mobile Dev B",
-      "completed": false
+      "completed": true
     },
     {
       "id": "3",
       "title": "Kelas Mobile Dev C",
-      "completed": false
+      "completed": true
+    },
+    {
+      "title": "Kelas Mobile Dev D",
+      "completed": true,
+      "id": "WlLvx7TuDCU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
